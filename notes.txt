@@ -1,0 +1,68 @@
+My approach to implementation
+
+NOTE: Before you run the terraform solution, kindly update the file vars.tf in asg module with the full path to your public key file.
+TODO: Add tags to the resources that have been created.
+1. Task One -
+
+Branches -
+a). exercise1-refactor
+
+Objective -
+i. Refactor the existing code base and make it modular for  ode re-use.
+ii. Prepare the git environment with a .ignore file
+
+b). exercise1-virginia
+
+Objective -
+i. Build the same stack in us-east-1 (Virginia) region
+ii. Ensure to keep the state files separate
+
+2. Task 2 -
+
+Branches
+
+a). exercise2-outage
+
+Objective -
+1. To avoid an outage, set up an auto-scaling group with launch configuration to scale instances across availability zones.
+
+
+3. Task 3 -
+
+Branch
+
+a). exercise3-bastion
+
+Objective -
+1. Enhance Security of the infrastructure by making ssh access only from the bastion server.
+
+TODO
+4. Task 4a -
+
+Deploying the Spring Boot Java Application (I would consider building a simple pipeline with a Jenkins file, and use Consul KV store & Consul-template for dynamic Nginx Configuration)
+
+  i. Stage 1 to 3 - Develop a dockerfile using an official maven image to compile, unit test & package the application
+  ii. Stage 4 - Deploy the jar file to the web server
+  iii. Stage 5 - Run all the necessary tests on the web server (Integration tests)
+  iv. For dynamic nginx configuration, I would use Consul KV store and Consul-template to update nginx configuration dynamically.
+
+
+ Task 4b -
+
+
+ i. Develop a terraform module for RDS (MySQL) with special security considerations such as;
+    -- Security group to allow connections only from the web servers on port 3306
+    -- Configure RDS in a private subnet without an internet gateway
+ ii. Setup the database and user required to connect to the database
+ iii. Get an output variable from terraform of the RDS DNS name
+ iv. Update the application.properties file inside resources directory to configure RDS connection string. I will consider the below params to configure.
+
+          spring.datasource.url
+          spring.datasource.username
+          spring.datasource.password
+          spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+          spring.jpa.database-platform=org.hibernate.dialect.MySQL5Dialect
+          spring.jpa.hibernate.ddl-auto=update
+
+v. Trigger the Jenkins file as prepared in 4a to deploy the application to the web servers and run necessary tests. 
+
