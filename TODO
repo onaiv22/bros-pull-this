@@ -1,0 +1,4 @@
+1, create 2 folders for the 2 Ireland and Virginia environments
+2, create a file called modules and then  create a  sub file called vpc for each
+   component of what will be deployed inside the vpc. e.g subnets, route_table, security_group,
+   nat_gateway etc. 
